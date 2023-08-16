@@ -1,0 +1,14 @@
+version: 2.1
+
+orbs:
+  flutter: circleci/flutter@2.0.2
+
+workflows:
+  test&lint:
+    jobs:
+      - flutter/lint:
+          registry: ghcr.io/cirruslabs
+          version: 3.12.0
+      - flutter/unit_test:
+          registry: ghcr.io/cirruslabs
+          version: 3.12.0

@@ -7,6 +7,8 @@ workflows:
   test&lint:
     jobs:
       - flutter/lint:
-          version: 3.13.0
+          registry: ghcr.io/cirruslabs
+          version: 3.12.0
       - flutter/unit_test:
-          version: 3.13.0
+          registry: ghcr.io/cirruslabs
+          version: 3.12.0

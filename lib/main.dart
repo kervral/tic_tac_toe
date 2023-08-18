@@ -16,8 +16,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Tic tac toe',
       theme: ThemeData(
+        fontFamily: GoogleFonts.roboto().fontFamily,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         textTheme: TextTheme(
+          labelMedium: const TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
           titleLarge: TextStyle(
             fontSize: 72,
             fontFamily: GoogleFonts.caveatBrush().fontFamily,

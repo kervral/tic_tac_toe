@@ -1,6 +1,6 @@
 import '../player/player.dart';
 
-typedef Board = List<List<int>>;
+typedef Board = List<List<Player?>>;
 
 abstract class AbstractTicTacToe {
   Player? findWinner();

@@ -14,10 +14,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           const AppLogo(),
-          const SizedBox(height: 150),
           FilledButton(
             onPressed: () {},
             style: OutlinedButton.styleFrom(

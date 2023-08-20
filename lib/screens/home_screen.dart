@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
           FilledButton(
             onPressed: () {},
             style: OutlinedButton.styleFrom(
-              minimumSize: const Size(170, 36),
+              minimumSize: const Size(170, 45),
             ),
             child: Text(
               'Play',

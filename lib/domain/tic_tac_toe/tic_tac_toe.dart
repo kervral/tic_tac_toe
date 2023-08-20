@@ -66,5 +66,16 @@ class TicTacToe extends AbstractTicTacToe {
   @override
   void play(Player player, int x, int y) {
     board[x][y] = player;
+
+    final Player? winner = findWinner();
+    if (winner != null) {
+      // Player won
+    }
+
+    if (isBoardFull()) {
+      // Emit draw
+    }
+
+    return;
   }
 }

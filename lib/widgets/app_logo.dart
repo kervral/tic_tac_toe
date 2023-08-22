@@ -8,7 +8,7 @@ class AppLogo extends StatelessWidget {
     return Column(
       children: <Widget>[
         AspectRatio(
-          aspectRatio: 2,
+          aspectRatio: 4 / 2,
           child: Image.asset('assets/app_icon.png'),
         ),
         Text(

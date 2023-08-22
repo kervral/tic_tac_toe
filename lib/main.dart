@@ -16,19 +16,25 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Tic tac toe',
       theme: ThemeData(
-        fontFamily: GoogleFonts.roboto().fontFamily,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
-        textTheme: TextTheme(
-          labelMedium: const TextStyle(
-            fontSize: 18,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-          titleLarge: TextStyle(
-            fontSize: 72,
-            fontFamily: GoogleFonts.caveatBrush().fontFamily,
-          ),
-        ),
+        fontFamily: GoogleFonts.roboto().fontFamily,
+        textTheme: Theme.of(context).textTheme.copyWith(
+              labelLarge: TextStyle(
+                fontFamily: GoogleFonts.caveatBrush().fontFamily,
+                fontSize: 70,
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.bold,
+              ),
+              labelMedium: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              titleLarge: TextStyle(
+                fontFamily: GoogleFonts.caveatBrush().fontFamily,
+                fontSize: 72,
+              ),
+            ),
         useMaterial3: true,
       ),
       home: const HomePage(),

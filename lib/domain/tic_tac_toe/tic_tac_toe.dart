@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../player/player.dart';
 import 'tic_tac_toe.interface.dart';
 
-class TicTacToe extends AbstractTicTacToe {
+class TicTacToe implements AbstractTicTacToe {
   TicTacToe();
 
   Board board = <List<Player?>>[
@@ -11,9 +11,19 @@ class TicTacToe extends AbstractTicTacToe {
     <Player?>[null, null, null],
     <Player?>[null, null, null],
   ];
-  final Player player1 = const Player(id: 1, icon: Icons.circle);
-  final Player player2 = const Player(id: 2, icon: Icons.close_rounded);
+
+  final Player player1 = const Player(
+    id: 1,
+    icon: Icon(Icons.radio_button_unchecked, color: Colors.red),
+  );
+  final Player player2 = const Player(
+    id: 2,
+    icon: Icon(Icons.close_rounded, color: Colors.blue),
+  );
   late Player currentPlayer = player1;
+
+  Player? winner;
+  bool isDraw = false;
 
   @override
   Player? findWinner() {
@@ -51,22 +61,13 @@ class TicTacToe extends AbstractTicTacToe {
 
   @override
   bool isBoardFull() {
-    for (final List<Player?> row in board) {
-      if (row.every((Player? cell) => cell == null)) {
+    for (final List<Player?> column in board) {
+      if (column.any((Player? cell) => cell == null)) {
         return false;
       }
     }
 
     return true;
-  }
-
-  @override
-  bool isGameOver() {
-    if (!isBoardFull()) {
-      return false;
-    }
-
-    return false;
   }
 
   @override
@@ -80,14 +81,16 @@ class TicTacToe extends AbstractTicTacToe {
 
     final Player? winner = findWinner();
     if (winner != null) {
-      // Player won
+      this.winner = winner;
       return;
     }
 
     if (isBoardFull()) {
-      // Emit draw
+      isDraw = true;
       return;
     }
+
+    currentPlayer = currentPlayer.id == 1 ? player2 : player1;
 
     return;
   }

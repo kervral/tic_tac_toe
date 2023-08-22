@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '/widgets/app_logo.dart';
+import 'game_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,8 +19,14 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           const AppLogo(),
           FilledButton(
-            onPressed: () {},
-            style: OutlinedButton.styleFrom(
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const GameScreen(),
+                ),
+              );
+            },
+            style: FilledButton.styleFrom(
               minimumSize: const Size(170, 45),
             ),
             child: Text(

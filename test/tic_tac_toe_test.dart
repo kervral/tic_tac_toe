@@ -10,22 +10,22 @@ void main() {
         expect(game.isBoardFull(), false);
       });
 
-      test('should return true on full board', () {
-        final TicTacToe game = TicTacToe();
-        game
-          ..play(game.player1, 0, 0)
-          ..play(game.player1, 0, 1)
-          ..play(game.player1, 0, 2)
-          ..play(game.player1, 1, 0)
-          ..play(game.player1, 1, 1)
-          ..play(game.player1, 1, 2)
-          ..play(game.player1, 2, 0)
-          ..play(game.player1, 2, 1)
-          ..play(game.player1, 2, 2);
+      test('should return true when the board is full and nobody wins', () {
+        final TicTacToe game = TicTacToe()
+          ..play(1, 0)
+          ..play(1, 1)
+          ..play(1, 2)
+          ..play(2, 0)
+          ..play(2, 1)
+          ..play(2, 2)
+          ..play(0, 0)
+          ..play(0, 1)
+          ..play(0, 2);
 
         expect(game.isBoardFull(), true);
       });
     });
+
     group('findWinner()', () {
       test('should return null when nobody wins and no moves has been played',
           () {
@@ -36,59 +36,90 @@ void main() {
 
       test('should return null when nobody wins and one move has been played',
           () {
-        final TicTacToe game = TicTacToe();
-
-        game.play(game.player1, 0, 0);
+        final TicTacToe game = TicTacToe()..play(0, 0);
 
         expect(game.findWinner(), null);
       });
 
-      test('should return player1 when player1 wins vertically', () {
-        final TicTacToe game = TicTacToe();
+      test('should find a winner when a player wins vertically', () {
+        final TicTacToe game = TicTacToe()
+          ..play(0, 0)
+          ..play(0, 1)
+          ..play(1, 0)
+          ..play(1, 1)
+          ..play(2, 0);
 
-        game
-          ..play(game.player1, 0, 0)
-          ..play(game.player1, 1, 0)
-          ..play(game.player1, 2, 0);
-
-        expect(game.findWinner(), game.player1);
+        expect(game.findWinner() != null, true);
       });
 
-      test('should return player1 when player1 wins horizontally', () {
-        final TicTacToe game = TicTacToe();
+      test('should find a winner when a player wins horizontally', () {
+        final TicTacToe game = TicTacToe()
+          ..play(0, 0)
+          ..play(1, 0)
+          ..play(0, 1)
+          ..play(1, 1)
+          ..play(0, 2);
 
-        game
-          ..play(game.player1, 0, 0)
-          ..play(game.player1, 0, 1)
-          ..play(game.player1, 0, 2);
-
-        expect(game.findWinner(), game.player1);
-      });
-
-      test(
-          'should return player1 when player1 wins on the top-left bottom-right diagonal',
-          () {
-        final TicTacToe game = TicTacToe();
-
-        game
-          ..play(game.player1, 0, 0)
-          ..play(game.player1, 1, 1)
-          ..play(game.player1, 2, 2);
-
-        expect(game.findWinner(), game.player1);
+        expect(game.findWinner() != null, true);
       });
 
       test(
-          'should return player1 when player1 wins on the top-right bottom-left diagonal',
+          'should find a winner when a player wins on the top-left bottom-right diagonal',
+          () {
+        final TicTacToe game = TicTacToe()
+          ..play(0, 0)
+          ..play(1, 0)
+          ..play(1, 1)
+          ..play(2, 1)
+          ..play(2, 2);
+
+        expect(game.findWinner() != null, true);
+      });
+
+      test(
+          'should find a winner when a player wins on the top-right bottom-left diagonal',
+          () {
+        final TicTacToe game = TicTacToe()
+          ..play(0, 2)
+          ..play(1, 2)
+          ..play(1, 1)
+          ..play(2, 2)
+          ..play(2, 0);
+
+        expect(game.findWinner() != null, true);
+      });
+    });
+
+    group('play()', () {
+      test('should switch current player when a move is made', () {
+        final TicTacToe game = TicTacToe();
+
+        final int firstPlayerId = game.currentPlayer.id;
+
+        game.play(0, 0);
+
+        expect(game.currentPlayer.id != firstPlayerId, true);
+      });
+
+      test('should not switch player on an already played cell', () {
+        final TicTacToe game = TicTacToe()..play(0, 0);
+
+        final int currentPlayerId = game.currentPlayer.id;
+
+        game.play(0, 0);
+
+        expect(game.currentPlayer.id == currentPlayerId, true);
+      });
+
+      test('should set the current player instance inside the current cell',
           () {
         final TicTacToe game = TicTacToe();
 
-        game
-          ..play(game.player1, 0, 2)
-          ..play(game.player1, 1, 1)
-          ..play(game.player1, 2, 0);
+        final int firstPlayerId = game.currentPlayer.id;
 
-        expect(game.findWinner(), game.player1);
+        game.play(0, 0);
+
+        expect(firstPlayerId == game.board[0][0]!.id, true);
       });
     });
   });

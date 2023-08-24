@@ -30,7 +30,7 @@ class _BoardState extends State<GameBoard> {
             for (int y = 0; y < widget.game.board[x].length; y++)
               InkWell(
                 onTap: () {
-                  widget.game.play(widget.game.currentPlayer, x, y);
+                  widget.game.play(x, y);
                   widget.refresh();
                 },
                 child: Container(

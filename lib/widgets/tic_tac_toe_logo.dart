@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AppLogo extends StatelessWidget {
-  const AppLogo({super.key});
+class TicTacToeLogo extends StatelessWidget {
+  const TicTacToeLogo({super.key});
 
   @override
   Widget build(BuildContext context) {

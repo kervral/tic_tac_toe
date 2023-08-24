@@ -1,7 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
-import '../player/player.dart';
-import 'tic_tac_toe.interface.dart';
+import '/domain/player/player.dart';
+import '/domain/tic_tac_toe/tic_tac_toe.interface.dart';
 
 class TicTacToe implements AbstractTicTacToe {
   TicTacToe();
@@ -20,10 +22,17 @@ class TicTacToe implements AbstractTicTacToe {
     id: 2,
     icon: Icon(Icons.close_rounded, color: Colors.blue),
   );
-  late Player currentPlayer = player1;
+  late Player currentPlayer = chooseStartingPlayer();
 
   Player? winner;
   bool isDraw = false;
+
+  @override
+  Player chooseStartingPlayer() {
+    final int randomId = Random().nextInt(2) + 1;
+
+    return randomId == 1 ? player1 : player2;
+  }
 
   @override
   Player? findWinner() {
@@ -71,22 +80,21 @@ class TicTacToe implements AbstractTicTacToe {
   }
 
   @override
-  void play(Player player, int x, int y) {
-    // Forbidden move, cell has already been played
-    if (board[x][y] != null) {
-      throw Error();
-    }
-
-    board[x][y] = player;
-
-    final Player? winner = findWinner();
-    if (winner != null) {
-      this.winner = winner;
+  void play(int x, int y) {
+    // Forbidden move, cell has already been played or game is over
+    if (board[x][y] != null || winner != null || isDraw) {
       return;
     }
 
-    if (isBoardFull()) {
-      isDraw = true;
+    board[x][y] = currentPlayer;
+
+    winner = findWinner();
+    if (winner != null) {
+      return;
+    }
+
+    isDraw = isBoardFull();
+    if (isDraw) {
       return;
     }
 

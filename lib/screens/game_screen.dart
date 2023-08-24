@@ -43,6 +43,8 @@ class _GameScreenState extends State<GameScreen> {
             duration: Duration(milliseconds: _animationDuration),
             child: Button(
               onPressed: () {
+                if (!_retryButtonVisible) return;
+
                 setState(() {
                   game = TicTacToe();
                   _retryButtonVisible = false;

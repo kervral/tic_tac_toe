@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '/widgets/app_logo.dart';
-import 'game_screen.dart';
+import '/screens/game_screen.dart';
+import '/widgets/button.dart';
+import '/widgets/tic_tac_toe_logo.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,8 +18,8 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          const AppLogo(),
-          FilledButton(
+          const TicTacToeLogo(),
+          Button(
             onPressed: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute<void>(
@@ -26,13 +27,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             },
-            style: FilledButton.styleFrom(
-              minimumSize: const Size(170, 45),
-            ),
-            child: Text(
-              'Play',
-              style: Theme.of(context).textTheme.labelMedium,
-            ),
+            text: 'Play',
           ),
         ],
       ),

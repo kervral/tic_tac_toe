@@ -1,4 +1,4 @@
-import '../player/player.dart';
+import '/domain/player/player.dart';
 
 typedef Board = List<List<Player?>>;
 

@@ -6,5 +6,5 @@ abstract class AbstractTicTacToe {
   Player chooseStartingPlayer();
   Player? findWinner();
   bool isBoardFull();
-  void play(Player player, int x, int y);
+  void play(int x, int y);
 }

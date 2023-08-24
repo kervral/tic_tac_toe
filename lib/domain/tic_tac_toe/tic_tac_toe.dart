@@ -80,13 +80,13 @@ class TicTacToe implements AbstractTicTacToe {
   }
 
   @override
-  void play(Player player, int x, int y) {
+  void play(int x, int y) {
     // Forbidden move, cell has already been played or game is over
     if (board[x][y] != null || winner != null || isDraw) {
       return;
     }
 
-    board[x][y] = player;
+    board[x][y] = currentPlayer;
 
     winner = findWinner();
     if (winner != null) {

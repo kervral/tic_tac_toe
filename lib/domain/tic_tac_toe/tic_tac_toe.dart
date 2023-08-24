@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '/domain/player/player.dart';
@@ -20,10 +22,17 @@ class TicTacToe implements AbstractTicTacToe {
     id: 2,
     icon: Icon(Icons.close_rounded, color: Colors.blue),
   );
-  late Player currentPlayer = player1;
+  late Player currentPlayer = chooseStartingPlayer();
 
   Player? winner;
   bool isDraw = false;
+
+  @override
+  Player chooseStartingPlayer() {
+    final int randomId = Random().nextInt(2) + 1;
+
+    return randomId == 1 ? player1 : player2;
+  }
 
   @override
   Player? findWinner() {
